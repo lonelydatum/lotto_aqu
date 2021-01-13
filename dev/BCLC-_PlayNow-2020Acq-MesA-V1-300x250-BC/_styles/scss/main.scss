@@ -1,0 +1,65 @@
+
+
+@import '../../../_common/styles/common.scss';
+
+.csl_2, .csl_3{
+	opacity: 0;
+}
+
+.frame1 {
+	opacity: 0;
+}
+
+
+
+#banner{
+	font-size: 20px;
+	color: #333;
+	width: 300px;
+	height: 250px;
+}
+
+.hand{
+	transform-origin: 50% 50%;
+}
+
+
+.cardWrapper {
+	position: absolute;
+	width: 300px;
+	height: 250px;
+
+	color: red;
+	font-size: 20px;
+}
+
+.cardFace {
+	width: 300px;
+	height: 250px;
+	position: absolute;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.endcard{
+	background-color: white;
+	opacity: 0;
+}
+
+.cta{
+	transform-origin: 50% 50%;
+	@include pos-scale(105, 144, .5);
+}
+
+.cardFace.front {
+
+}
+.cardFace.back {
+	// opacity: 0;
+}
+
+.phone_end{
+	@include pos-scale(-153, -8, .535);	
+}
