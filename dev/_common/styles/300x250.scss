@@ -1,0 +1,19 @@
+
+
+
+#banner{	
+	width: 300px;
+	height: 250px;
+}
+
+
+
+
+.cta{
+	@include pos-scale(105, 144, .5);
+}
+
+
+.phone_end{
+	@include pos-scale(-153, -8, .535);	
+}

@@ -146,3 +146,29 @@ sup{
 	background-color: red;
 	opacity: 0;
 }
+
+
+
+.csl_2, .csl_3{
+	opacity: 0;
+}
+.cardWrapper {
+	position: absolute;
+}
+
+.cardFace {	
+	position: absolute;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.endcard{
+	background-color: white;
+	opacity: 0;
+}
+
+.cta{
+	transform-origin: 50% 50%;
+}
