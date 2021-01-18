@@ -35,18 +35,29 @@ function start(id) {
 	var tl = new TimelineMax();
 	tl.set(".frame1", { opacity: 1 });
 
-	tl.from(".t1", .4, { x: -size.w, ease: Power3.easeOut }, "+=.1");
+	var isSS = size.w === 160 && size.h === 600;
+	if (isSS) {
+		// tl.from(".t1", .4, {x:-size.w, ease:Power3.easeOut}, "+=.1");	
+	} else {
+			tl.from(".t1", .4, { x: -size.w, ease: Power3.easeOut }, "+=.1");
+		}
+
 	tl.to("#wrap1 .card", .6, { rotationY: -180, transformStyle: "preserve-3d", ease: Back.easeOut }, "+=3.1");
 	tl.set(".front", { display: "none" });
-	tl.from(".t2", .4, { x: -size.w, ease: Power3.easeOut }, "+=.1");
+
+	if (isSS) {
+		// tl.from(".t1", .4, {x:-size.w, ease:Power3.easeOut}, "+=.1");	
+	} else {
+			tl.from(".t2", .4, { x: -size.w, ease: Power3.easeOut }, "+=.1");
+		}
 
 	tl.add("endFlip", "+=3");
 	tl.set(".endcard", { opacity: 1, display: "block" }, "endFlip");
 	tl.to("#wrap1 .card", .6, { rotationY: -360, transformStyle: "preserve-3d", ease: Back.easeOut }, "endFlip");
 
-	tl.from(".phone_end", .3, { opacity: 0, y: "-=200", ease: Power3.easeOut }, "+=.3");
+	tl.from(".phone_end", .3, { opacity: 0, y: "-=" + size.h * .8, ease: Power3.easeOut }, "+=.3");
 
-	tl.add("csl_2", "+=.4");
+	tl.add("csl_2", "+=.5");
 	tl.set(".csl_1", { opacity: 0 }, "csl_2");
 	tl.set(".csl_2", { opacity: 1 }, "csl_2");
 

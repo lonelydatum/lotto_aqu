@@ -21,6 +21,7 @@ function deploy(projectName){
     const size = splited[5]
     const prov = splited[6]
 
+    console.log("../_common/images/"+size+"/");
 
     var entry = './dev/'+projectName+'/index.html';
     var stream =  gulp.src(entry)
@@ -32,8 +33,8 @@ function deploy(projectName){
         .pipe(replace('<script type="text/javascript" src="http://localhost:48626/takana.js"></script>', ''))
         .pipe(replace("takanaClient.run({host: 'localhost:48626'});", ''))
         .pipe(replace("../_common/images/"+size+"/", ''))
-        .pipe(replace("../_common/images/prov/", ''))
-        .pipe(replace("../_common/images/msg/", ''))
+        
+        
         
 
 
@@ -67,14 +68,20 @@ function getImagePaths(projectName, cb){
 
 
 function log_free(projectName){  
-    var images = []
+    const splited = projectName.split("-")
+    const msg = splited[3]
+    const version = splited[4]
+    const size = splited[5]
+    const prov = splited[6]
+
+    var images = ["dev/_common/images/"+size+"/backup_"+prov+".jpg"]
     getImagePaths(projectName, function(url){
         images.push(url)
     })
 
 
     var stream = gulp.src('./dev/'+projectName+'/_bundled/main.js')
-        // .pipe(stripDebug())
+        .pipe(stripDebug())
         .pipe(rename("log-free.js"))
         .pipe(gulp.dest(function(file){            
             return file.base;
@@ -84,18 +91,18 @@ function log_free(projectName){
         
 
     deploy(projectName).on("end", function(){
-        console.log("_____________ 1");    
+        // console.log("_____________ 1");    
         for(var i=0;i<images.length;i++){
-            console.log(images[i]);    
+            // console.log(images[i]);    
             gulp.src(images[i]).pipe(gulp.dest('./docs/deploy/'+projectName))
         }
-        console.log("_____________ 2");    
+        // console.log("_____________ 2");    
 
 
-        gulp.src('./docs/deploy/'+projectName+'/**',  { base : "./docs/deploy" })
-            .pipe(zip(projectName+'.zip'))
-            .pipe(gulp.dest('./docs/zips'));
-        return;
+        // gulp.src('./docs/deploy/'+projectName+'/**',  { base : "./docs/deploy" })
+        //     .pipe(zip(projectName+'.zip'))
+        //     .pipe(gulp.dest('./docs/zips'));
+        // return;
     })
 
         
