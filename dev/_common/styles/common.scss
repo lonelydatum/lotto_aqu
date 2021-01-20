@@ -149,9 +149,9 @@ sup{
 
 
 
-.csl_2, .csl_3{
-	opacity: 0;
-}
+// .csl_2, .csl_3{
+// 	opacity: 0;
+// }
 .cardWrapper {
 	position: absolute;
 }
@@ -168,4 +168,15 @@ sup{
 
 .cta{
 	transform-origin: 50% 50%;
+}
+
+
+
+.bgGrad{
+	width: 100%;
+	height: 85px;
+	position: absolute;
+	bottom: 0;
+	opacity: .8;
+	background: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 4%, rgba(0, 0, 0, 0) 52%);
 }

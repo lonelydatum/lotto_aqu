@@ -215,10 +215,6 @@ sup {
   opacity: 0;
 }
 
-.csl_2, .csl_3 {
-  opacity: 0;
-}
-
 .cardWrapper {
   position: absolute;
 }
@@ -226,15 +222,6 @@ sup {
 .cardFace {
   position: absolute;
   overflow: hidden;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .endcard {
@@ -251,6 +238,54 @@ sup {
 #banner {
   width: 300px;
   height: 250px;
+}
+
+.csl {
+  -webkit-transform: translate(222px, 41px);
+  -ms-transform: translate(222px, 41px);
+  transform: translate(222px, 41px);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  position: absolute;
+}
+
+.csl .red {
+  opacity: 0;
+}
+
+.csl .csl_1 {
+  -webkit-transform: translate(0px, 0px) scale(1.1, 1.1);
+  -ms-transform: translate(0px, 0px) scale(1.1, 1.1);
+  transform: translate(0px, 0px) scale(1.1, 1.1);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  position: absolute;
+}
+
+.csl .csl_2 {
+  -webkit-transform: translate(0px, 17px);
+  -ms-transform: translate(0px, 17px);
+  transform: translate(0px, 17px);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  position: absolute;
+}
+
+.csl .csl_3 {
+  -webkit-transform: translate(0px, 34px);
+  -ms-transform: translate(0px, 34px);
+  transform: translate(0px, 34px);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  position: absolute;
 }
 
 .cta {

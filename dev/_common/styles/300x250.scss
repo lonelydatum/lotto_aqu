@@ -6,7 +6,23 @@
 	height: 250px;
 }
 
+.csl{
+	@include pos(222, 41);
+	.red{
+		opacity: 0;
+	}
+	.csl_1{
+		@include pos-scale(0, 0, 1.1);
+	}
+	
+	.csl_2{
+		@include pos(0, 17);
+	}
 
+	.csl_3{
+		@include pos(0, 34);
+	}
+}
 
 
 .cta{

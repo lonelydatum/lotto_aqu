@@ -3,7 +3,7 @@
 
 var _commonJsCommonJs = require('../../_common/js/common.js');
 
-(0, _commonJsCommonJs.start)("A_BC");
+(0, _commonJsCommonJs.start)("B_BC");
 
 module.exports = {};
 
@@ -13,6 +13,9 @@ module.exports = {};
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var banner = document.getElementById('banner');
 var size = { w: banner.offsetWidth, h: banner.offsetHeight };
 
@@ -21,18 +24,22 @@ TweenLite.defaultEase = Power4.easeOut;
 TweenLite.set(".cardWrapper", { perspective: 400 });
 
 TweenLite.set([".back", ".front"], { backfaceVisibility: "hidden" });
-TweenLite.set(".flipper", { x: size.w / 2, y: size.h / 2 });
+// TweenLite.set(".flipper", {x:size.w/2, y:size.h/2});
 TweenLite.set([".cardWrapper", ".cardFace"], { width: size.w, height: size.h });
-TweenLite.set(".card", { transformStyle: "preserve-3d", ease: Back.easeOut });
+TweenLite.set(".card", { transformStyle: "preserve-3d", width: size.w, height: size.h });
 
 var isLB = size.w === 728 && size.h === 90;
-var isSS = size.w === 160 && size.h === 600;
+var is320 = size.w === 320 && size.h === 50;
+var is300 = size.w === 300 && size.h === 50;
+var isLandscape = isLB || is320 || is300;
+var isMobile = is320 || is300;
 
-if (isLB) {
-	TweenLite.set(".back", { rotationX: 180 });
-} else {
-	TweenLite.set(".back", { rotationY: 180 });
-}
+var read_t1 = isMobile ? 2 : 3.1;
+var read_t2 = isMobile ? 2.7 : 3;
+
+var rotateXY = isLandscape ? { rotationX: "+=180" } : { rotationY: "+=180" };
+
+TweenLite.set(".back", _extends({}, rotateXY));
 
 function bgExitHandler(e) {
 	Enabler.exit('Background Exit');
@@ -45,39 +52,18 @@ function start(id) {
 	var tl = new TimelineMax();
 	tl.set(".frame1", { opacity: 1 });
 
-	if (isSS) {
-		// tl.from(".t1", .4, {x:-size.w, ease:Power3.easeOut}, "+=.1");	
-	} else {
-			tl.from(".t1", .4, { x: -size.w, ease: Power3.easeOut }, "+=.1");
-		}
+	tl.from(".t1", .4, { x: -size.w, ease: Power3.easeOut }, "+=.1");
 
-	if (isLB) {
-		tl.add("gar", "+=.3");
-		tl.to('.cardFace', 2, { rotationX: -180 }, "gar");
-		// tl.to('.card', 2, {z:50}, "gar");	
-	} else {
-			tl.to("#wrap1 .card", .6, { rotationY: -180 }, "+=3.1");
-		}
-
-	return;
+	tl.to('.card', .6, _extends({}, rotateXY), "+=" + read_t1);
 
 	tl.set(".front", { display: "none" });
 
-	if (isSS) {
-		// tl.from(".t1", .4, {x:-size.w, ease:Power3.easeOut}, "+=.1");	
-	} else {
+	tl.from(".t2", .4, { x: -size.w, ease: Power3.easeOut }, "+=.1");
 
-			tl.from(".t2", .4, { x: -size.w, ease: Power3.easeOut }, "+=.1");
-		}
-
-	tl.add("endFlip", "+=3");
+	tl.add("endFlip", "+=" + read_t2);
 	tl.set(".endcard", { opacity: 1, display: "block" }, "endFlip");
 
-	if (isLB) {
-		tl.to(["#wrap1 .front", '.back'], .6, { rotationX: -360 }, "endFlip");
-	} else {
-		tl.to("#wrap1 .card", .6, { rotationY: -360 }, "endFlip");
-	}
+	tl.to("#wrap1 .card", .6, _extends({}, rotateXY), "endFlip");
 
 	tl.from(".phone_end", .3, { opacity: 0, y: "-=" + size.h * .8, ease: Power3.easeOut }, "+=.3");
 

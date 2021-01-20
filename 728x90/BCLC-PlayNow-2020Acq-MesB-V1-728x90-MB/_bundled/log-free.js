@@ -3,7 +3,7 @@
 
 var _commonJsCommonJs = require('../../_common/js/common.js');
 
-(0, _commonJsCommonJs.start)("A_BC");
+(0, _commonJsCommonJs.start)("B_MB");
 
 module.exports = {};
 
@@ -22,10 +22,24 @@ var size = { w: banner.offsetWidth, h: banner.offsetHeight };
 TweenLite.defaultEase = Power4.easeOut;
 
 TweenLite.set(".cardWrapper", { perspective: 400 });
-TweenLite.set(".back", { rotationY: 180 });
+
 TweenLite.set([".back", ".front"], { backfaceVisibility: "hidden" });
-TweenLite.set(".flipper", { x: size.w / 2, y: size.h / 2 });
+// TweenLite.set(".flipper", {x:size.w/2, y:size.h/2});
 TweenLite.set([".cardWrapper", ".cardFace"], { width: size.w, height: size.h });
+TweenLite.set(".card", { transformStyle: "preserve-3d", width: size.w, height: size.h });
+
+var isLB = size.w === 728 && size.h === 90;
+var is320 = size.w === 320 && size.h === 50;
+var is300 = size.w === 300 && size.h === 50;
+var isLandscape = isLB || is320 || is300;
+var isMobile = is320 || is300;
+
+var read_t1 = isMobile ? 2 : 3.1;
+var read_t2 = isMobile ? 2.7 : 3;
+
+var rotateXY = isLandscape ? { rotationX: "+=180" } : { rotationY: "+=180" };
+
+TweenLite.set(".back", _extends({}, rotateXY));
 
 function bgExitHandler(e) {
 	Enabler.exit('Background Exit');
@@ -38,32 +52,18 @@ function start(id) {
 	var tl = new TimelineMax();
 	tl.set(".frame1", { opacity: 1 });
 
-	var isSS = size.w === 160 && size.h === 600;
-	var isLB = size.w === 728 && size.h === 90;
+	tl.from(".t1", .4, { x: -size.w, ease: Power3.easeOut }, "+=.1");
 
-	var rotationXY = { transformStyle: "preserve-3d", ease: Back.easeOut };
+	tl.to('.card', .6, _extends({}, rotateXY), "+=" + read_t1);
 
-	if (isSS) {
-		// tl.from(".t1", .4, {x:-size.w, ease:Power3.easeOut}, "+=.1");	
-	} else if (isLB) {
-			rotationXY = _extends({}, rotationXY, { rotationX: -180 });
-		} else {
-			rotationXY = _extends({}, rotationXY, { rotationY: -180 });
-			tl.from(".t1", .4, { x: -size.w, ease: Power3.easeOut }, "+=.1");
-		}
-
-	tl.to("#wrap1 .card", .6, rotationXY, "+=3.1");
 	tl.set(".front", { display: "none" });
 
-	if (isSS) {
-		// tl.from(".t1", .4, {x:-size.w, ease:Power3.easeOut}, "+=.1");	
-	} else {
-			tl.from(".t2", .4, { x: -size.w, ease: Power3.easeOut }, "+=.1");
-		}
+	tl.from(".t2", .4, { x: -size.w, ease: Power3.easeOut }, "+=.1");
 
-	tl.add("endFlip", "+=3");
+	tl.add("endFlip", "+=" + read_t2);
 	tl.set(".endcard", { opacity: 1, display: "block" }, "endFlip");
-	tl.to("#wrap1 .card", .6, { rotationY: -360, transformStyle: "preserve-3d", ease: Back.easeOut }, "endFlip");
+
+	tl.to("#wrap1 .card", .6, _extends({}, rotateXY), "endFlip");
 
 	tl.from(".phone_end", .3, { opacity: 0, y: "-=" + size.h * .8, ease: Power3.easeOut }, "+=.3");
 
